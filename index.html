@@ -4,157 +4,384 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>肥富吉貴製作所</title>
+
 <style>
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#fff8f1;
-    color:#333;
+margin:0;
+font-family:Arial,sans-serif;
+background:#fff8f1;
+color:#4a3728;
 }
-header{
-    text-align:center;
-    padding:80px 20px;
-    background:linear-gradient(to bottom,#ffe4c7,#fff8f1);
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 28px;
+background:rgba(255,248,241,.95);
+backdrop-filter:blur(12px);
+z-index:999;
+box-sizing:border-box;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
-header h1{
-    font-size:48px;
-    margin-bottom:20px;
+
+.logo{
+font-size:24px;
+font-weight:bold;
 }
-header p{
-    font-size:20px;
-    color:#666;
+
+.hamburger{
+font-size:32px;
+cursor:pointer;
 }
-.btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:14px 28px;
-    background:#ff9f43;
-    color:white;
-    text-decoration:none;
-    border-radius:12px;
-    font-weight:bold;
+
+.menu{
+position:fixed;
+top:0;
+right:-340px;
+width:320px;
+height:100%;
+background:white;
+padding:35px;
+transition:.35s;
+z-index:1000;
+box-shadow:-10px 0 30px rgba(0,0,0,.1);
+box-sizing:border-box;
+overflow:auto;
 }
+
+.menu.active{
+right:0;
+}
+
+.menu h2{
+margin-top:60px;
+}
+
+.menu a{
+display:block;
+padding:18px 0;
+text-decoration:none;
+color:#4a3728;
+border-bottom:1px solid #eee;
+font-size:17px;
+}
+
+.hero{
+padding:35px;
+margin-top:70px;
+background:linear-gradient(to right,#f1dfcf,#fff8f1,#f1dfcf);
+}
+
+.hero img{
+width:100%;
+border-radius:40px;
+display:block;
+box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
 .section{
-    max-width:1200px;
-    margin:auto;
-    padding:60px 20px;
+max-width:1250px;
+margin:auto;
+padding:70px 20px;
 }
+
+.about{
+line-height:2;
+font-size:18px;
+color:#6a584c;
+}
+
 .products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
 }
+
 .card{
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+background:white;
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 }
+
 .card img{
-    width:100%;
-    height:260px;
-    object-fit:cover;
+width:100%;
+height:260px;
+object-fit:cover;
 }
+
 .card-content{
-    padding:20px;
+padding:24px;
 }
+
 .price{
-    color:#ff7b00;
-    font-size:24px;
-    font-weight:bold;
+color:#d97b2d;
+font-size:24px;
+font-weight:bold;
 }
-.buy-btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:12px 20px;
-    background:#ff9f43;
-    color:white;
-    text-decoration:none;
-    border-radius:10px;
+
+.btn{
+display:inline-block;
+margin-top:15px;
+background:#d9a066;
+color:white;
+text-decoration:none;
+padding:12px 20px;
+border-radius:14px;
+border:none;
+cursor:pointer;
+font-size:15px;
 }
+
+.manager{
+background:#fff1e4;
+border-radius:30px;
+padding:50px;
+line-height:2;
+font-size:18px;
+}
+
+.admin{
+background:#fff1e4;
+padding:40px;
+border-radius:30px;
+}
+
+.order-box{
+background:white;
+padding:30px;
+border-radius:24px;
+margin-top:25px;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+input, select, textarea{
+width:100%;
+padding:14px;
+margin-top:12px;
+border-radius:12px;
+border:1px solid #ddd;
+box-sizing:border-box;
+font-size:15px;
+}
+
 footer{
-    text-align:center;
-    padding:40px;
-    color:#777;
+text-align:center;
+padding:50px;
+color:#8a7768;
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:white;
+border-radius:20px;
+overflow:hidden;
+}
+
+.table th,.table td{
+padding:16px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.badge{
+background:#ffe4c7;
+padding:6px 12px;
+border-radius:999px;
+font-size:13px;
 }
 </style>
 </head>
+
 <body>
 
-<header>
-    <h1>肥富吉貴製作所</h1>
-    <p>陪伴毛孩的日常手作</p>
-    <a class="btn" href="#products">查看商品</a>
-</header>
+<div class="header">
+<div class="logo">肥富吉貴製作所</div>
+<div class="hamburger" onclick="toggleMenu()">☰</div>
+</div>
+
+<div class="menu" id="menu">
+<h2>商品選單</h2>
+<a href="#products">暖冬系列｜橘貓手作圍巾</a>
+<a href="#products">橘貓日常｜手作小包</a>
+<a href="#products">阿肥監工款｜貓咪吊飾</a>
+<a href="#711">7-11 門市選擇</a>
+<a href="#admin">管理者後台模式</a>
+<a href="#orders">訂單管理介面</a>
+</div>
+
+<section class="hero">
+<img src="hero.png" alt="首頁主圖">
+</section>
 
 <section class="section">
-    <h2>關於我們</h2>
-    一間毛孩的小手作選物店。<br>
+<h2>關於我們</h2>
+
+<div class="about">
+一間毛孩的小手作選物店。<br>
 我們喜歡貓咪、手作與慢生活，<br>
 希望把溫暖與陪伴感帶進每一天。<br><br>
 
 每件商品皆為少量手工製作，<br>
 也由店長「阿肥」親自監工中。
-</p>
+</div>
 </section>
 
 <section class="section" id="products">
-    <h2>人氣商品</h2>
 
-    <div class="products">
+<h2>熱門商品</h2>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1200&auto=format&fit=crop">
-            <div class="card-content">
-                <h3>阿肥監工款｜貓咪圍巾</h3>
-                <p>柔軟舒適，適合秋冬穿搭。</p>
-                <div class="price">NT$390</div>
-                <a class="buy-btn" href="https://forms.gle/">我要購買</a>
-            </div>
-        </div>
+<div class="products">
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=1200&auto=format&fit=crop">
-            <div class="card-content">
-                <h3>橘貓日常｜手作小包</h3>
-                <p>療癒系日常小包包。</p>
-                <div class="price">NT$590</div>
-                <a class="buy-btn" href="https://forms.gle/">我要購買</a>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1200&auto=format&fit=crop">
+<div class="card-content">
+<h3>暖冬系列｜橘貓手作圍巾</h3>
+<p>柔軟舒適，適合秋冬毛孩穿搭。</p>
+<div class="price">NT$390</div>
+<button class="btn">我要購買</button>
+</div>
+</div>
 
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=1200&auto=format&fit=crop">
-            <div class="card-content">
-                <h3>大富限定｜貓咪吊飾</h3>
-                <p>每個都是手工製作。</p>
-                <div class="price">NT$250</div>
-                <a class="buy-btn" href="https://forms.gle/">我要購買</a>
-            </div>
-        </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?q=80&w=1200&auto=format&fit=crop">
+<div class="card-content">
+<h3>橘貓日常｜手作小包</h3>
+<p>療癒系奶茶色日常小包。</p>
+<div class="price">NT$590</div>
+<button class="btn">我要購買</button>
+</div>
+</div>
 
-    </div>
-</section>
-<section class="section">
-    <h2>店長介紹</h2>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=1200&auto=format&fit=crop">
+<div class="card-content">
+<h3>阿肥監工款｜貓咪吊飾</h3>
+<p>每一個都是少量手工製作。</p>
+<div class="price">NT$250</div>
+<button class="btn">我要購買</button>
+</div>
+</div>
 
-    <p>
-    店長「阿肥」是一隻每天都會跑來監工的橘貓。<br>
-    擅長偷毛線、霸佔包包，以及在半夜爆衝。<br><br>
-
-    大富則負責睡覺與可愛。
-    </p>
+</div>
 </section>
 
 <section class="section">
-    <h2>聯絡我們</h2>
-    <p>LINE：@zz830930</p>
-    <p>YouTube：https://youtube.com/@chucats0930?si=ciibB9BCct-fAncz</p>
+<div class="manager">
+<h2>店長介紹</h2>
+
+店長「阿肥」是一隻每天都會跑來監工的橘貓。<br>
+擅長偷毛線、霸佔包包，以及半夜突然爆衝。<br><br>
+
+啵吉則負責睡覺與可愛。
+</div>
+</section>
+
+<section class="section" id="711">
+<h2>🏪 7-11 門市選擇</h2>
+
+<div class="order-box">
+
+<a class="btn" href="https://emap.pcsc.com.tw/ecmap/default.aspx#" target="_blank">
+開啟 7-11 官方門市地圖
+</a>
+
+<select>
+<option>請選擇縣市</option>
+<option>台北市</option>
+<option>新北市</option>
+<option>桃園市</option>
+<option>台中市</option>
+<option>高雄市</option>
+</select>
+
+<select>
+<option>請選擇地區 / 路名</option>
+<option>板橋區</option>
+<option>中和區</option>
+<option>新莊區</option>
+<option>永和區</option>
+</select>
+
+<select>
+<option>請選擇門市</option>
+<option>板新門市</option>
+<option>文化門市</option>
+<option>新埔門市</option>
+<option>江翠門市</option>
+</select>
+
+<input placeholder="請填寫完整 7-11 門市名稱">
+
+</div>
+</section>
+
+<section class="section admin" id="admin">
+<h2>⚙️ 管理者後台模式</h2>
+
+<div class="order-box">
+
+<h3>📦 商品上架管理</h3>
+<input placeholder="商品名稱">
+<input placeholder="商品價格">
+<input placeholder="商品圖片網址">
+<textarea placeholder="商品介紹"></textarea>
+
+<h3>🖼️ 商品照片上傳欄位</h3>
+<input type="file">
+
+<h3>🛒 下單網址 / 表單</h3>
+<input placeholder="Google 表單 / LINE 下單網址">
+
+<button class="btn">新增商品</button>
+
+</div>
+</section>
+
+<section class="section" id="orders">
+<h2>📋 訂單管理介面</h2>
+
+<table class="table">
+<tr>
+<th>訂單編號</th>
+<th>商品</th>
+<th>金額</th>
+<th>狀態</th>
+</tr>
+
+<tr>
+<td>#0001</td>
+<td>暖冬系列｜橘貓手作圍巾</td>
+<td>NT$390</td>
+<td><span class="badge">待出貨</span></td>
+</tr>
+
+<tr>
+<td>#0002</td>
+<td>阿肥監工款｜貓咪吊飾</td>
+<td>NT$250</td>
+<td><span class="badge">已完成</span></td>
+</tr>
+
+</table>
 </section>
 
 <footer>
 © 2026 肥富吉貴製作所
 </footer>
+
+<script>
+function toggleMenu(){
+document.getElementById('menu').classList.toggle('active');
+}
+</script>
 
 </body>
 </html>
